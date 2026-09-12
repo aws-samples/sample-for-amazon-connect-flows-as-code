@@ -1,0 +1,27 @@
+{
+  "_comment": [
+    "Shared fixture for the placeholder-encoding contract.",
+    "",
+    "The exporter (Python) and the deployer (Terraform) each derive placeholder",
+    "keys independently from a resource NAME. They never talk to each other, so",
+    "they agree only because both apply the same transform. If either side drifts,",
+    "every placeholder silently fails to resolve and templatefile() errors at",
+    "apply time in whichever environment applies first.",
+    "",
+    "Both tests/test_encoding.py and tests/encoding.tftest.hcl read THIS file, so",
+    "neither implementation can be changed without the other failing.",
+    "",
+    "Transform: base64(utf-8) then '+'->'-', '/'->'_', strip '=' padding.",
+    "See _encode_name() in modules/flow-exporter/lambda/exporter/transformers/",
+    "reference_substitutor.py and the replace() chain in modules/flow-deployer."
+  ],
+  "cases": {
+    "retail-support_en": "cmV0YWlsLXN1cHBvcnRfZW4",
+    "retail-priority_en": "cmV0YWlsLXByaW9yaXR5X2Vu",
+    "routing_config": "cm91dGluZ19jb25maWc",
+    "global_read_prompt_from_datatable": "Z2xvYmFsX3JlYWRfcHJvbXB0X2Zyb21fZGF0YXRhYmxl",
+    "retail-standard_hours": "cmV0YWlsLXN0YW5kYXJkX2hvdXJz",
+    "Customer Service (2)": "Q3VzdG9tZXIgU2VydmljZSAoMik",
+    "prompts_en-GB": "cHJvbXB0c19lbi1HQg"
+  }
+}

@@ -1,0 +1,40 @@
+# pylint configuration for the exporter Lambda.
+#
+# Committed deliberately: the Contact Center blog code guidelines require the
+# language linter to live in the repo, and require any exceptions to be stated
+# with reasons rather than silently disabled. Each disable below is a reason.
+
+[FORMAT]
+# 120, not the default 100. Only two lines in the tree exceeded 120 and both
+# were reflowed; the remainder are log-format calls where wrapping hurts
+# readability more than the length does.
+max-line-length=120
+
+[MESSAGES CONTROL]
+disable=
+    import-error,
+# ^ intra-package imports are resolved by the Lambda runtime, not by a checkout
+#   root. Verified working end to end against a live Connect instance.
+
+    broad-exception-caught,
+# ^ 18 occurrences, all deliberate. The exporter's contract is to export what it
+#   can and warn about what it cannot: a single unresolvable reference must not
+#   abort an export of many flows. Each site logs before continuing. Narrowing
+#   these would convert partial success into total failure, which is the wrong
+#   behaviour for a scheduled/event-driven exporter.
+
+    too-many-locals,
+    too-many-arguments,
+    too-many-positional-arguments,
+    too-many-return-statements,
+    too-many-instance-attributes,
+    too-many-branches,
+    too-many-statements,
+# ^ Structural, and concentrated in reference_substitutor.py, which maps eight
+#   families of Connect resource reference. Splitting it would scatter one
+#   cohesive mapping table across several files for no reader benefit. This code
+#   is carried from the implementation the post describes; keeping it
+#   recognisable against that original is worth more than a lower metric.
+
+[BASIC]
+good-names=i,j,k,n,s,t,e,f,rs,id

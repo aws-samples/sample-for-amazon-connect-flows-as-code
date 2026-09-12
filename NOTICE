@@ -1,0 +1,6 @@
+Amazon Connect flows as code — sample
+Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+This sample bundles third-party software into the exporter AWS Lambda
+deployment package. See THIRD-PARTY-LICENSES for the attributions those
+licences require.

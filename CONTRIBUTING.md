@@ -57,3 +57,42 @@ If you discover a potential security issue in this project we ask that you notif
 ## Licensing
 
 See the [LICENSE](LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+
+## Checks specific to this sample
+
+Run these before opening a pull request:
+
+```bash
+terraform fmt -recursive .
+python3 tests/test_encoding.py                    # exporter-side encoding contract
+cd modules/placeholder-keys && terraform test     # deployer-side, needs no credentials
+cd modules/flow-exporter/lambda/exporter && pylint . --rcfile=../../../../.pylintrc
+```
+
+### If you change the placeholder encoding
+
+It must change on **both** sides — `_encode_name()` in the exporter's
+`reference_substitutor.py` and `modules/placeholder-keys` — and
+`tests/encoding-fixture.json` must be updated with it.
+
+The two sides derive placeholder keys independently and never communicate, so a
+one-sided change means no placeholder resolves anywhere. It fails at apply time
+in whichever environment applies first, not in review, which is why the contract
+is pinned by a fixture asserted from both languages.
+
+## Why there is no CI
+
+Repolinter's default ruleset includes an `integrates-with-ci` check, and this
+repository deliberately fails it.
+
+The AWS Samples guidance is explicit that sample code is not a project: *"It
+doesn't need a website, it doesn't need CI/CD, and it isn't about building a
+community."* A sample is tied to a blog post and is archived when that post
+reaches end of life.
+
+A GitHub Actions workflow was added briefly and removed. It pinned tool versions
+that drifted from the ones the code was verified against, so it failed on the
+first push — a red badge on a published sample is worse than no badge, and worse
+than the Repolinter check it existed to satisfy.
+
+Run the checks above locally instead. They need no AWS credentials.

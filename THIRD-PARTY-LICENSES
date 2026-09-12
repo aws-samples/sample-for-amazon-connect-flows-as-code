@@ -1,0 +1,105 @@
+THIRD-PARTY LICENCES
+====================
+
+This sample is licensed under MIT No Attribution (see LICENSE).
+
+The exporter AWS Lambda deployment package bundles the dependencies below.
+Bundling is deliberate rather than incidental: the Amazon Connect data tables
+API requires boto3 >= 1.35, and the boto3 version present in a Lambda runtime is
+whichever version that runtime shipped with. Pinning and bundling makes the
+artifact reproducible. The pin is `var.boto3_version` in
+modules/flow-exporter/variables.tf.
+
+No dependency below carries a copyleft or otherwise reciprocal licence.
+
+Installed by `pip install boto3==1.42.81`, as resolved on 7 September 2026:
+
+  Package           Version           Licence
+  ----------------  ----------------  ------------------------------------------
+  boto3             1.42.81           Apache-2.0
+  botocore          1.42.97           Apache-2.0
+  jmespath          1.1.0             MIT
+  python-dateutil   2.9.0.post0       Dual: BSD-3-Clause OR Apache-2.0
+  s3transfer        0.16.1            Apache-2.0
+  six               1.17.0            MIT
+  urllib3           2.7.0             MIT
+
+Note on botocore: the build trims botocore's bundled service definitions to the
+five services the exporter actually calls (connect, s3, chime-sdk-voice,
+lexv2-models, and the s3transfer dependency's requirements). This reduces the
+artifact from roughly 6.1 MB to 1.7 MB. Trimming removes data files only; no
+code is modified, so the licence terms above continue to apply unchanged.
+
+--------------------------------------------------------------------------------
+Apache License 2.0 — applies to boto3, botocore, s3transfer, and optionally
+python-dateutil
+--------------------------------------------------------------------------------
+
+Full text: https://www.apache.org/licenses/LICENSE-2.0
+
+  Copyright 2013-2026 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  Copyright 2012-2026 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License"). You may not use
+  this file except in compliance with the License. A copy of the License is
+  located at http://aws.amazon.com/apache2.0/ or in the "license" file
+  accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT
+  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+  License for the specific language governing permissions and limitations under
+  the License.
+
+--------------------------------------------------------------------------------
+MIT License — applies to jmespath, six, urllib3
+--------------------------------------------------------------------------------
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy of
+  this software and associated documentation files (the "Software"), to deal in
+  the Software without restriction, including without limitation the rights to
+  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+  of the Software, and to permit persons to whom the Software is furnished to do
+  so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+  jmespath: Copyright (c) 2013 Amazon.com, Inc. or its affiliates
+  six:      Copyright (c) 2010-2024 Benjamin Peterson
+  urllib3:  Copyright (c) 2008-2020 Andrey Petrov and contributors
+
+--------------------------------------------------------------------------------
+BSD 3-Clause License — applies to python-dateutil
+--------------------------------------------------------------------------------
+
+  Copyright 2017- Paul Ganssle <paul@ganssle.io>
+  Copyright dateutil contributors (see AUTHORS file in the upstream project)
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+  * Redistributions of source code must retain the above copyright notice, this
+    list of conditions and the following disclaimer.
+  * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+  * Neither the name of the copyright holder nor the names of its contributors
+    may be used to endorse or promote products derived from this software without
+    specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

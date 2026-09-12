@@ -1,0 +1,33 @@
+# Copy to terraform.tfvars and edit if the defaults do not suit.
+#
+# Every variable has a working default, so `terraform apply` with no tfvars file
+# at all is a valid way to run this demo. This file exists to show what can be
+# changed.
+
+# Must be a Region that supports Amazon Connect data tables.
+aws_region = "us-east-1"
+
+# A random six-character suffix is appended, because Connect instance aliases are
+# globally unique across ALL AWS accounts.
+instance_alias_prefix = "connect-flows-demo-src"
+
+# Only flows whose name starts with this are exported, and the prefix is stripped
+# from the S3 key. It lets a designer experiment without polluting the repo: name
+# a flow "scratch-foo" and the exporter ignores it.
+#
+# MUST match the prefix flow-deployer applies, or the exporter skips the very
+# flows this demo is about.
+export_name_prefix = "gui-"
+
+# Prefix for exported S3 keys, conventionally the environment name.
+s3_key_prefix = "source"
+
+# Trimmed to what this demo uses. "data_tables" is deliberately absent — that
+# exporter is not implemented and the data table is created by Terraform in both
+# instances rather than exported. See variables.tf.
+resource_types = ["contact_flows", "contact_flow_modules"]
+
+tags = {
+  Project = "connect-flows-as-code-demo"
+  Role    = "source-instance"
+}

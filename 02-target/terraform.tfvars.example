@@ -1,0 +1,16 @@
+# Copy to terraform.tfvars and edit if the defaults do not suit.
+#
+# Every variable has a working default. Note there is no export_name_prefix here:
+# nothing is authored in the target instance, so nothing is exported from it, and
+# flows are created with their bare names.
+
+# Must match 01-source. The two instances have to be in the same Region for the
+# walkthrough's S3 copy to make sense.
+aws_region = "us-east-1"
+
+instance_alias_prefix = "connect-flows-demo-tgt"
+
+tags = {
+  Project = "connect-flows-as-code-demo"
+  Role    = "target-instance"
+}
