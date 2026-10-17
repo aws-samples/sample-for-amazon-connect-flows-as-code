@@ -8,8 +8,8 @@
 > deployed as-is. It creates real AWS resources and will incur charges. See
 > [SECURITY.md](SECURITY.md) and the cleanup section below.
 
-Companion code for the AWS Contact Center blog post *How Booking.com manages
-Amazon Connect Customer flows as code at scale*.
+Companion code for the AWS Contact Center blog post on managing Amazon Connect
+Customer flows as code at scale.
 
 Published at [aws-samples/sample-for-amazon-connect-flows-as-code](https://github.com/aws-samples/sample-for-amazon-connect-flows-as-code) under MIT-0.
 
