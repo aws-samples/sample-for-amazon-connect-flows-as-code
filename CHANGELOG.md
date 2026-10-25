@@ -15,6 +15,11 @@ All notable changes to this project are documented here. The format follows
   (`modules/placeholder-keys/tests/`) against one shared fixture.
 - `.pylintrc` documenting the linting exceptions and their reasons.
 
+### Fixed
+- The exporter's `EVENT_TO_RESOURCE_TYPE` map was missing `UpdateContactFlowName`,
+  which the contact flow EventBridge rule subscribes to. Renaming a flow invoked
+  the Lambda, exported nothing and returned `partial_failure`.
+
 ### Changed
 - Contact flows and flow modules are deployed with the `awscc` provider rather
   than `aws`, so newly released Amazon Connect Customer features are reachable

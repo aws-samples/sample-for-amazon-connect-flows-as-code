@@ -49,6 +49,7 @@ EVENT_TO_RESOURCE_TYPE = {
     "CreateContactFlow": "contact_flows",
     "UpdateContactFlowContent": "contact_flows",
     "UpdateContactFlowMetadata": "contact_flows",
+    "UpdateContactFlowName": "contact_flows",
     "CreateContactFlowModule": "contact_flow_modules",
     "UpdateContactFlowModuleContent": "contact_flow_modules",
     "UpdateContactFlowModuleMetadata": "contact_flow_modules",
